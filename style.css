@@ -1,0 +1,158 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+body{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form{
+    margin-top: 1.8em;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    position: relative;
+}
+
+input{
+    width: 60%;
+    padding: .8em .5em;
+}
+
+.saveBtn, .showTasks, .close{
+    height: 3em;
+    padding: 0 1em;
+    background-color: gray;
+    border: none;
+    border-radius: .7em;
+    color: #fff;
+}
+
+main h3{
+    color: blue;
+    font-size: 2em;
+}
+
+.dateTime{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    gap: 2em;
+    justify-content: center;
+}
+
+#msg{
+    margin: .6em 0;
+    color: red;
+}
+
+.noTask{
+    color: red
+}
+
+.showTasks{
+    background-color: blue;
+}
+
+
+.tasksWrapper{
+    display: flex;
+    gap: 1em;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 60%;
+    gap: 1em;
+}
+
+li{
+    list-style: none;
+    font-size: 1.2em;
+}
+
+.del{
+    background-color: red;
+    color: white;
+    padding: .5em;
+    border: none;
+    cursor: pointer;
+}
+
+.taskContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    transform: translate(0%, 0%);
+    transition: all 2s ease-in-out;
+    background: #ffffffe3;
+}
+
+.close{
+    position: absolute;
+    bottom: 1em;
+    background-color: red;
+}
+
+.flexCon{
+    display: flex;
+    height: calc(100vh - 2em);
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 2em;
+    width: 100%;
+    flex-direction: column;
+}
+
+.searchCon{
+    display: flex;
+    width: 100%;
+    margin-top: 1em;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2em;
+}
+
+.searchCon button{
+    background-color: blue;
+    border: none;
+    height: 3em;
+    padding: 0 1em;
+    border-radius: .5em;
+    color: #fff;
+}
+
+.taskP{
+    text-align: right;
+}
+
+.taskContainer h2{
+    margin-bottom: .3em;
+    color: blue;
+    font-size: 2em;
+    text-align: center;
+}

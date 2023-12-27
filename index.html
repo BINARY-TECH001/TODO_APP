@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> TODO APP </title>
+</head>
+<body>
+    <main>
+        <h3> TODO APP </h3>
+        <p id="greetEL">Good morning</p>
+        <div class="dateTime">
+            <p class="TimeGreet" id="timeEl"> 10:02am</p>
+            <p id="dateEl">Mon 27/11/2002</p>
+        </div>
+        <form action="" id="form">
+            <input name="task" type="text" placeholder="Enter Task">
+            <button type="submit" class="saveBtn" id="submitBtn"> Save </button>
+        </form>
+        <p id="msg">  </p>
+        <button type="button" class="showTasks" id="showTasks">Show Tasks</button>
+
+        <div class="taskContainer" id="taskContainer">
+              
+        </div>
+    </main>
+</body>
+<script>
+    const form = document.getElementById('form')
+    const taskCon = document.getElementById('taskContainer')
+    let msg = document.getElementById('msg')
+    let taskMsg = document.getElementById('msgs')
+    const showTasksBtn = document.getElementById('showTasks')
+    const closeBtn = document.getElementById('closeBtn')
+    let dateEle = document.getElementById('dateEl')
+    let timeEl = document.getElementById('timeEl')
+    let greetEL = document.getElementById('greetEL')
+    let searchForm = document.getElementById('searchForm')
+    let searchBtn = document.getElementById('searchBtn')
+
+    let tasks = [];
+    form.addEventListener('submit', (e)=> {
+        e.preventDefault()
+        taskEle = form.elements.task
+        const task = taskEle.value.trim()
+        if(task === ''){
+            msg.innerText = 'Task Cannot be blanked..😒'
+        }else{
+            tasks.push(task)
+            taskEle.value=''
+        }
+    })
+    
+
+    function displayTask(task){
+        let num = 1
+        if(tasks.length < 0 ){
+            return
+        }
+        var modalContents = 
+            `<div class='flexCon'>
+                    <h2> TASKS </h2>
+                    ${task.length === 0 ? 'Empty Task😒' : ''}
+                <div class='container'>
+                    <form class='searchCon' onSubmit=sayHi() id='searchForm'>
+                        <input type='text' placeholder='Search Task...' />
+                        <button id='searchBtn' onClick='sayHi()' type='submit'> Search </button>
+                    </form>
+                    ${task.map((task, index) => `
+                        <ul class='tasksWrapper'>
+                        <span> ${num++}. </span>
+                        <li class="taskP"> ${task}</li>
+                        <span> ${getDateTime()} </span>
+                        <button class='del' onClick="deleteTask(${index})"> delete </button>
+                        </ul>
+                        `).join("")
+                        }
+                </div>
+                <button onClick='closeCon()' class="close" id="closeBtn">Close</button>
+                </div>
+            `;
+            taskCon.innerHTML = modalContents
+    }
+
+    showTasksBtn.addEventListener('click', ()=> {
+        taskCon.style.display = 'block'
+        displayTask(tasks)
+    })
+
+    function closeCon(){
+        taskCon.style.display = 'none'
+    }
+    function deleteTask(taskToDelete){
+          const newTask = tasks.filter((task, index) => taskToDelete !== index )
+          tasks = [...newTask]
+          displayTask(tasks)
+    }
+
+    function getDateTime(){
+        const currentDateTime = new Date().toLocaleTimeString()
+        const currentDate = currentDateTime.slice(0,6)
+        const currentTime = currentDateTime.slice(6)
+        return currentDate.split('/').join('/').split(':').join(':') + currentTime
+    }
+
+    function dateTime(){
+        let days = [
+            'Sun',
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thur',
+            'Fri',
+            'Sat'
+        ];
+
+        let date = new Date();
+        let day = date.getDay();
+        let dayNum = date.getDate()
+        let month = date.getMonth()
+        let year = date.getFullYear()
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds()
+        
+        timeEl.innerHTML = `🕑 ${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}am`
+        dateEle.innerHTML = `🗓️ ${days[day]} ${dayNum}/${month}/${year}`
+
+        if (hours >= 12){
+            greetEL.innerHTML = 'Good Afternoon'
+        } else if (hours < 12){
+            greetEL.innerHTML = 'Good Morning'
+        }
+    }
+
+    function addZero(time){
+        return time >= 10 ? time : `0${time}`
+    }
+
+    setInterval(() => {
+        dateTime()
+    }, 1000);
+
+
+</script>
+</html>
