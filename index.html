@@ -123,8 +123,14 @@
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let seconds = date.getSeconds()
+        let hrs;
+        if(hours > 12){
+            hrs = hours - 12
+        } else{
+            hrs = hours
+        }
         
-        timeEl.innerHTML = `🕑 ${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}am`
+        timeEl.innerHTML = `🕑 ${addZero(hrs)}:${addZero(minutes)}:${addZero(seconds)}am`
         dateEle.innerHTML = `🗓️ ${days[day]} ${dayNum}/${month}/${year}`
 
         if (hours >= 12){
